@@ -2,13 +2,13 @@
 <html lang="br">
   <head>
     <meta charset="utf-8">
-    <title>Template</title>
+    <title>Portfólio</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
     
     <!-- Favicons -->
-    <link href="{{asset('img/favicon.png')}}" rel="icon">
+    <link href="{{asset('img/myicon.png')}}" rel="icon">
     <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
     
     <!-- Google Fonts -->
@@ -33,24 +33,73 @@
     <header id="header">
       <div class="container-fluid"> 
         <div id="logo" class="pull-left">
-          <h1><a href="#intro" class="scrollto">BizPage</a></h1>
+          @if(\Auth::check())
+            <h1><a href="#intro" class="scrollto"></a>{{Auth()->user()->name}}</h1>
+          @else
+            <h1><a href="#intro" class="scrollto"></a>Portfólio Online</h1>
+          @endif
           </div>
         <nav id="nav-menu-container">
           <ul class="nav-menu">
-            <li class="menu-active"><a href="#intro">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#team">Team</a></li>
-            <li class="menu-has-children"><a href="">Drop Down</a>
+            <li class="menu-active"><a href="#intro">Inicio</a></li>
+            @if(!\Auth::check())
+            <li class="menu-has-children"><a href="#">Entrar</a>
               <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-                <li><a href="#">Drop Down 5</a></li>
+                <li>
+                  <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="box">
+                      <div class="row">
+                        <div class="form-group">
+                          <label for="email">{{ __('Endereço de E-mail') }}</label>
+                          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                          @error('email')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                        </div>
+
+                        <div class="form-group">
+                          <div class="col-sm-12">
+                            <label for="password">{{ __('Senha') }}</label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <br>
+                          <div class="col-sm-12" align="center">
+                          <button type="submit" class="btn btn-primary">
+                              {{ __('Entrar') }}
+                          </button>
+                        </div>
+                        <div class="form-group">
+                          @if (Route::has('password.request'))
+                              <a class="btn btn-link" href="{{ route('password.request') }}">
+                                  {{ __('Esqueceu sua senha?') }}
+                              </a>
+                          @endif
+                        </div>
+                        <div class="form-group">
+                          <a class="btn btn-link" href="{{ url('/register') }}">
+                              {{ __('Registrar-se') }}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </li>
               </ul>
+              @else
+                <li><a href="{{route('logout')}}">Sair</a></li>
             </li>
-            <li><a href="#contact">Contact</a></li>
+            @endif
+            <li><a href="">Portfólios</a></li>
           </ul>
         </nav><!-- #nav-menu-container -->
       </div>
