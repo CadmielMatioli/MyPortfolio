@@ -34,9 +34,9 @@
       <div class="container-fluid"> 
         <div id="logo" class="pull-left">
           @if(\Auth::check())
-            <h1><a href="#intro" class="scrollto"></a>{{Auth()->user()->name}}</h1>
+            <h1 style="color:aliceblue;"><a href="#intro" class="scrollto"></a>{{Auth()->user()->name}}</h1>
           @else
-            <h1><a href="#intro" class="scrollto"></a>Portfólio Online</h1>
+            <h1 style="color:aliceblue;"><a href="#intro" class="scrollto"></a>Portfólio Online</h1>
           @endif
           </div>
         <nav id="nav-menu-container">
@@ -51,7 +51,7 @@
                     <div class="box">
                       <div class="row">
                         <div class="form-group">
-                          <label for="email">{{ __('Endereço de E-mail') }}</label>
+                          <label for="email" style="color:green;">{{ __('Endereço de E-mail') }}</label>
                           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                           @error('email')
                               <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
 
                         <div class="form-group">
                           <div class="col-sm-12">
-                            <label for="password">{{ __('Senha') }}</label>
+                            <label for="password" style="color:green;">{{ __('Senha') }}</label>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -74,7 +74,7 @@
                         <div class="form-group">
                           <br>
                           <div class="col-sm-12" align="center">
-                          <button type="submit" class="btn btn-primary">
+                          <button type="submit" class="btn btn-success">
                               {{ __('Entrar') }}
                           </button>
                         </div>
@@ -98,6 +98,7 @@
               @else
                 <li><a href="{{route('logout')}}">Sair</a></li>
             </li>
+            <li><a href="{{route('user.edit',['id' => auth()->user()->id])}}">Meus dados</a></li>
             @endif
             <li><a href="">Portfólios</a></li>
           </ul>
@@ -125,6 +126,19 @@
     <script src="{{asset('contactform/contactform.js')}}"></script>
     <!-- Template Main Javascript File -->
     <script src="{{asset('js/main.js')}}"></script>
-      
+       <!--==========================Footer============================-->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Best <a href="https://bootstrapmade.com/">Bootstrap Templates</a> by BootstrapMade
+            </div>
+        </div>
+    </footer>
+    <!-- #footer -->
+    
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a> 
   </body>
 </html>

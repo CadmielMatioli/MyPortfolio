@@ -22,9 +22,14 @@ Route::get('/logout', function()
     Auth::logout();
     Session::flush();
     return Redirect::to('/');
+
 })->name('logout');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
+    // Route::resource('user', 'UserController');
+    Route::get('user/edit/{id}', 'UserController@edit')->name('user.edit');
+    Route::post('user/update/{id}', 'UserController@update')->name('user.update');
 
 });
