@@ -41,7 +41,7 @@
           </div>
         <nav id="nav-menu-container">
           <ul class="nav-menu">
-            <li class="menu-active"><a href="#intro">Inicio</a></li>
+          <li class="menu-active"><a href="{{url('/')}}">Inicio</a></li>
             @if(!\Auth::check())
             <li class="menu-has-children"><a href="#">Entrar</a>
               <ul>
@@ -96,11 +96,10 @@
                 </li>
               </ul>
               @else
-                <li><a href="{{route('logout')}}">Sair</a></li>
+              <li><a href="{{route('user.edit',['id' => auth()->user()->id])}}">Meus dados</a></li>
             </li>
-            <li><a href="{{route('user.edit',['id' => auth()->user()->id])}}">Meus dados</a></li>
+            <li><a href="{{route('logout')}}">Sair</a></li>
             @endif
-            <li><a href="">Portfólios</a></li>
           </ul>
         </nav><!-- #nav-menu-container -->
       </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\More;
 class UserController extends Controller
 {
     /**
@@ -56,7 +57,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('user.edit');
+        $user = User::find($id);
+
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -68,9 +71,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return json_encode("entrou");
         $user = User::find($id);
-        $user->age = $request->post('age');
+        $user->age = $request->post('age'); 
         $user->save();
         return redirect()->back();
     }

@@ -22,8 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->unsignedBigInteger('employer_id')->nullable();
             $table->unsignedBigInteger('course_id')->nullable();
-            $table->unsignedBigInteger('more_id')->nullable();
-            $table->foreign('more_id')->references('id')->on('more');
             $table->foreign('employer_id')->references('id')->on('employer');
             $table->foreign('course_id')->references('id')->on('courses');
             $table->rememberToken();
