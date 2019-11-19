@@ -4,6 +4,7 @@
         <div class="row">
             @csrf  
             <div class="col-md-12 center">
+            @csrf
             <img src="{{asset('img/call-to-action-bg.jpg')}}" alt="image profile" class="rounded-circle" width="100px" height="100px">
             <hr>
             <p>{{$user->name}}, {{$user->age}}</p>
