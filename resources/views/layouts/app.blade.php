@@ -42,6 +42,9 @@
         <nav id="nav-menu-container">
           <ul class="nav-menu">
           <li class="menu-active"><a href="{{url('/')}}">Inicio</a></li>
+          @if(\Auth::check())
+            <li><a href="{{route('share', ['id' => auth()->user()->id])}}">Perfil Publico</a></li>
+          @endif
             @if(!\Auth::check())
             <li class="menu-has-children"><a href="#">Entrar</a>
               <ul>

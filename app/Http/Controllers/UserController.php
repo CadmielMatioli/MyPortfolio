@@ -87,4 +87,10 @@ class UserController extends Controller
     {
         //
     }
+
+    public function share($id)
+    {
+        $user = User::with('skill')->find($id);
+        return view('user.share', compact('user'));
+    }
 }

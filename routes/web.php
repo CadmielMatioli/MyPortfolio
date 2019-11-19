@@ -34,3 +34,5 @@ Route::middleware('auth')->group(function () {
     Route::post('skill', 'SkillController@create')->name('skill.insertupdate');
 
 });
+
+Route::get('sharedlink/{id}', 'UserController@share')->name('share');
