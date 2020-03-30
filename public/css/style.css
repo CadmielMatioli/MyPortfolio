@@ -1468,3 +1468,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-top: 92px;
   background-color: #13a456;
 }
+
+.span-cursor{
+  cursor: pointer;
+}
