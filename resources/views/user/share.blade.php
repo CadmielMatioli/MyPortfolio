@@ -7,8 +7,8 @@
             <img src="{{asset('img/call-to-action-bg.jpg')}}" alt="image profile" class="rounded-circle" width="100px" height="100px">
             <hr>
             <p>{{$user->name}}, {{$user->age}}</p>
-            <p>Descriçao <br> {{$user->more->descriptionfuture}}</p>
-            <p>Visão futura <br> {{$user->more->loking}}</p>
+            <p>Descriçao <br> {{$user->more->loking}}</p>
+            <p>Visão futura <br> {{$user->more->descriptionfuture}}</p>
             <section id="skills">
                     <div class="container">
                         

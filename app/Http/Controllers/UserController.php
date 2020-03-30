@@ -35,11 +35,13 @@ class UserController extends Controller
         return view('user.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(User $user)
     {
-        $user = User::find($id);
-        $user->age = $request->post('age'); 
-        $user->save();
+        $user->update([
+            'name' => request()->name,
+            'email' => request()->email,
+            'age' => request()->age,
+        ]);  
         return redirect()->back();
     }
 

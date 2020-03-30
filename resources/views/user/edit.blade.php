@@ -22,20 +22,30 @@
                             </div>
                             <h2 class="title"><a href="#">Pessoais</a></h2>
                             <div class="container">
-                                <form method="POST" class="form-validate" action="{{route('user.update', ['id' => auth()->user()->id])}}">
+                                <form method="POST" class="form-validate" action="{{route('user.update', ['user' => auth()->user()->id])}}">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label for="name">Nome</label>
-                                            <input type="name" class="form-control" id="name" name="name" placeholder="nome" value="{{auth()->user()->name}}">
+                                            <input type="name" class="form-control" id="name" name="name" placeholder="nome" value="{{auth()->user()->name}}" required>
+                                            @if ($errors->has('name'))
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ $errors->first('name') }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="col-md-12">
                                             <label for="email">Endereço de Email</label>
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="email" value="{{auth()->user()->email}}">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="email" value="{{auth()->user()->email}}" required>
+                                            @if ($errors->has('email'))
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ $errors->first('email') }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="col-md-12">
                                             <label for="age">Idade</label>
-                                            <input type="age" class="form-control" id="age" name="age" placeholder="idade" value="{{auth()->user()->age}}">
+                                            <input type="number" class="form-control" id="age" name="age" placeholder="idade" value="{{auth()->user()->age}}">
                                         </div>
                                         <div class="col-md-12" align="center">
                                             <br>

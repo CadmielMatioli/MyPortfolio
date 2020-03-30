@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('user/edit/{id}', 'UserController@edit')->name('user.edit');
-    Route::post('user/update/{id}', 'UserController@update')->name('user.update');
+    Route::post('user/update/{user}', 'UserController@update')->name('user.update');
     Route::post('more', 'MoreController@create')->name('more.description');
     Route::post('skill', 'SkillController@create')->name('skill.insertupdate');
     Route::delete('skill/destroy/{skill}', 'SkillController@destroy')->name('skill.destroy');
