@@ -8,7 +8,7 @@ use App\Models\Skill;
 class SkillController extends Controller
 {
     public function create(Request $request){
-       $skill = Skill::UpdateOrInsert(
+        Skill::UpdateOrInsert(
             [
                 'name' => $request->post('name')
             ],
@@ -19,4 +19,10 @@ class SkillController extends Controller
         );
         return redirect()->back();
     }
+    
+    public function destroy(Skill $skill){
+        $skill->delete();
+        return redirect()->back();
+    }
+
 }

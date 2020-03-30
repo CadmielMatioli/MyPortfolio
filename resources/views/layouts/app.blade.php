@@ -111,6 +111,8 @@
     @yield('content')
 
     <!-- JavaScript Libraries -->
+
+    <script src="{{asset('lib/jquery/jquery.js')}}"></script>
     <script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('lib/jquery/jquery-migrate.min.js')}}"></script>
     <script src="{{asset('lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -142,5 +144,6 @@
     <!-- #footer -->
     
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a> 
+    @yield('js')
   </body>
 </html>

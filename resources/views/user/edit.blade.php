@@ -55,13 +55,13 @@
                                 <div class="icon"><i class="ion-ios-list-outline"></i></div>
                             </div>
                             <h2 class="title"><a href="#">O que Procura?</a></h2>
-                            <form action="{{route('skill.insertupdate')}}" method="POST">
+                            <form action="{{route('more.description')}}" method="POST">
                                 @csrf    
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="description">Descrição</label>
-                                            @if (!empty($user->more->loking))
+                                            @if (auth()->user()->more)
                                                 <textarea name="loking" class="form-control" id="loking" cols="30" placeholder="Descrição" rows="5">{{auth()->user()->more->loking}}</textarea>
                                             @else
                                                 <textarea name="loking" class="form-control" id="loking" cols="30" placeholder="Descrição" rows="5"></textarea>
@@ -99,19 +99,19 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <input class="form-control" type="text" name="name" id="name" placeholder="Habilidade">
+                                            <input class="form-control" required type="text"  pattern="A-Za-z]"  name="name" id="name" placeholder="Habilidade">
                                         </div>
                                         <div class="col-md-12" align="center">
                                             <br>
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-secondary">
-                                                    <input type="radio" name="level" id="option1" autocomplete="off" value="24">Baixo
+                                                    <input type="radio" name="level" id="option1" autocomplete="off" value="24" required>Baixo
                                                 </label>
                                                 <label class="btn btn-secondary">
-                                                    <input type="radio" name="level" id="option2" autocomplete="off" value="74">Médio
+                                                    <input type="radio" name="level" id="option2" autocomplete="off" value="74" required>Médio
                                                 </label>
                                                 <label class="btn btn-secondary">
-                                                    <input type="radio" name="level" id="option3" autocomplete="off" value="99">Avançado
+                                                    <input type="radio" name="level" id="option3" autocomplete="off" value="99" required>Avançado
                                                 </label>
                                             </div>
                                         </div>
@@ -146,16 +146,39 @@
                 </header>
                 
                 <div class="skills-content">
-                    @foreach ($user->skill as $users)
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{$users->level}}" aria-valuemin="0" aria-valuemax="100">
-                            <span class="skill">{{$users->name}} <i class="val">{{$users->level}}%</i></span>
+                    @forelse ($user->skills as $skill)
+                    <div class="row">
+                        <div class="col-11">
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{$skill->level}}" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">{{$skill->name}} <i class="val">{{$skill->level}}%</i></span>
+                                </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-                
+                        <div class="col-1">
+                            <form id="form-delete-skill" action="{{route('skill.destroy', $skill->id)}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                        <span id="span-send" class="skill mx-auto span-cursor">Delete</span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    @empty
+                        <div class="col-12 text-center">Não há itens para listar</div>
+                    @endforelse
+                </div>        
             </div>
         </section>              
-    </main>
+    </main> 
 @endsection
+@section('js')
+    <script>
+        $('#span-send').on('click', function(){
+            $('#form-delete-skill').submit();
+        });
+    </script>
+@stop

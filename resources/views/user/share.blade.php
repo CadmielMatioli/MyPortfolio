@@ -17,15 +17,16 @@
                         </header>
                         
                         <div class="skills-content">
-                            @foreach ($user->skill as $users)
+                            @forelse ($user->skills as $skill)
                                 <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{$users->level}}" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="skill">{{$users->name}} <i class="val">{{$users->level}}%</i></span>
+                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{$skill->level}}" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="skill">{{$skill->name}} <i class="val">{{$skill->level}}%</i></span>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <div class="col-12 text-center">Não há itens para listar</div>
+                            @endforelse
                         </div>
-                        
                     </div>
                 </section>            
             </div>
